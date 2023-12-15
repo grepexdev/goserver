@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -12,8 +13,8 @@ func main() {
 	corsMux := middlewareCors(m)
 
 	m.HandleFunc("/", handlePage)
-
-	const addr = ":8080"
+	port := os.Getenv("PORT")
+	addr := ":" + port
 	srv := http.Server{
 		Handler:      corsMux,
 		Addr:         addr,
